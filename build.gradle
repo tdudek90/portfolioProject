@@ -30,5 +30,6 @@ dependencies {
 	compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.22'
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.2.0.RELEASE'
 
 }
