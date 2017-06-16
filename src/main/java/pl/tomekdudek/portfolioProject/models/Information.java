@@ -13,13 +13,11 @@ import javax.persistence.Id;
 public class Information {
 
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String description;
-
 
     public Information() {
     }
@@ -46,5 +44,10 @@ public class Information {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
 }

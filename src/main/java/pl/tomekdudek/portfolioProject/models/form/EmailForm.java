@@ -1,6 +1,5 @@
 package pl.tomekdudek.portfolioProject.models.form;
 
-import com.sun.scenario.effect.impl.prism.PrImage;
 
 /**
  * Created by Tomek on 2017-06-15.
@@ -13,6 +12,13 @@ public class EmailForm {
     private String message;
 
     public EmailForm() {
+    }
+
+    public EmailForm(String name, String email, String phoneNumber, String message) {
+        this.name = name;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.message = message;
     }
 
     public String getName() {
@@ -45,5 +51,15 @@ public class EmailForm {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "EmailForm{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", message='" + message + '\'' +
+                '}';
     }
 }
