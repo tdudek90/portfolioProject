@@ -1,39 +1,39 @@
-package pl.tomekdudek.portfolioProject.models;
+package pl.tomekdudek.portfolioProject.models.form;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Date;
 
-/**
- * Created by Tomek on 2017-06-24.
- */
 
-@Entity
-public class Project {
+public class ProjectForm {
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotEmpty(message = "{NotEmpty.project.name}")
     private String name;
+    @NotEmpty(message = "{NotEmpty.project.description}")
     private String description;
+    @NotEmpty(message = "{NotEmpty.project.client}")
     private String client;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Temporal(TemporalType.DATE)
     private Date date;
+    @NotEmpty
     private String img;
 
-    public Project() {
+    public ProjectForm(){
+
     }
 
-    public Project(ProjectForm projectForm){
-        name = projectForm.getName();
-        description = projectForm.getDescription();
-        client = projectForm.getClient();
-        date = projectForm.getDate();
-        img = projectForm.getImg();
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 
     public int getId() {
@@ -74,13 +74,5 @@ public class Project {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 }

@@ -8,21 +8,24 @@
 
 <!--<p th:text="${someString}"></p>-->
 
-    <form action="#" th:action="@{/projectform}" th:object="${projectObject}" method="post">
-        <!--<p>Name<input type="number" th:field="*{id}"/></p>-->
-        <p>Name<input type="text" th:field="*{name}"/>
+<form action="#" th:action="@{/projectform}" th:object="${projectObject}" method="post">
+    <p>Name<input type="text" th:field="*{name}"/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
-        </p>
-        <p>Description<input type="text" th:field="*{description}"/>
-            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description error</span>
-        </p>
+    </p>
+    <p>Description<input type="text" th:field="*{description}"/>
+        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description error</span>
+    </p>
 
-        <p>Client<input type="text" th:field="*{client}"/>
-            <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}">client error</span>
-        </p>
-        <p>Data<input type="date" th:fiel="data-el_id=${date}"/></p>
-        <p>Img<input type="text" th:field="*{img}"/></p>
-        <p><input type="submit" value="Wyslij"/></p>
+    <p>Client<input type="text" th:field="*{client}"/>
+        <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}">client error</span>
+    </p>
+    <p>Data<input type="date" th:field="*{date}"/>
+        <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date error</span>
+
+    </p>
+
+    <p>Img<input type="text" th:field="*{img}"/></p>
+    <p><input type="submit" value="Wyslij"/></p>
 
 
 </form>

@@ -1,20 +1,22 @@
 package pl.tomekdudek.portfolioProject.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
 import pl.tomekdudek.portfolioProject.InformationRepository;
 import pl.tomekdudek.portfolioProject.MailService;
 import pl.tomekdudek.portfolioProject.ProjectRepository;
-import pl.tomekdudek.portfolioProject.models.Information;
 import pl.tomekdudek.portfolioProject.models.Project;
+import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
 import pl.tomekdudek.portfolioProject.models.form.EmailForm;
 
 import javax.validation.Valid;
-import javax.xml.crypto.Data;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
@@ -29,9 +31,6 @@ public class MainController {
 
     @Autowired
     MailService mailService;
-
-    @Autowired
-    TemplateEngine templateEngine;
 
 
     @RequestMapping("/index")
@@ -78,19 +77,26 @@ public class MainController {
 
     @RequestMapping(value = "/projectform", method = RequestMethod.GET)
     public String projectForm(Model model){
-        model.addAttribute("projectObject", new Project());
+        model.addAttribute("projectObject", new ProjectForm());
         return "project";
 
     }
 
     @RequestMapping(value = "/projectform", method = RequestMethod.POST)
-    public String newProjectForm(@ModelAttribute ("projectObject") @Valid Project projecta, BindingResult result){
+    public String newProjectForm(@ModelAttribute ("projectObject") @Valid ProjectForm projectForm, BindingResult result){
         if (result.hasErrors()){
-
             return "project";
         }
-        return "Przyszła klasa";
+        Project projectObject = new Project(projectForm);
+        projectRepository.save(projectObject);
+        return "test";
 
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder){
+        binder.registerCustomEditor(       Date.class,
+                new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
     }
 
 

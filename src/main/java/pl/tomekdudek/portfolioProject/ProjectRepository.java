@@ -3,6 +3,7 @@ package pl.tomekdudek.portfolioProject;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import pl.tomekdudek.portfolioProject.models.Project;
+import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
 
 import java.util.List;
 
