@@ -1,5 +1,7 @@
 package pl.tomekdudek.portfolioProject.models;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,8 +15,11 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String client;
     private Date date;
     private String img;
@@ -22,6 +27,7 @@ public class Project {
     public Project(){
 
     }
+
 
     public String getImg() {
         return img;
