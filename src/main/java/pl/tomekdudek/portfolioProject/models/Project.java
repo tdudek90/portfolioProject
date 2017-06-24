@@ -15,11 +15,11 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.project.name}")
     private String name;
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.project.description}")
     private String description;
-    @NotEmpty
+    @NotEmpty(message = "{NotEmpty.project.client}")
     private String client;
     private Date date;
     private String img;

@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.TemplateEngine;
 import pl.tomekdudek.portfolioProject.InformationRepository;
 import pl.tomekdudek.portfolioProject.MailService;
@@ -87,13 +84,12 @@ public class MainController {
     }
 
     @RequestMapping(value = "/projectform", method = RequestMethod.POST)
-    @ResponseBody
-    public String newProjectForm(@Valid Project projecta, BindingResult result){
+    public String newProjectForm(@ModelAttribute ("projectObject") @Valid Project projecta, BindingResult result){
         if (result.hasErrors()){
 
-            return "error" + result.getAllErrors().toString();
+            return "project";
         }
-        return "Przyszła klasa" + projecta.getName();
+        return "Przyszła klasa";
 
     }
 
