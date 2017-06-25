@@ -11,13 +11,17 @@ import org.thymeleaf.TemplateEngine;
 import pl.tomekdudek.portfolioProject.InformationRepository;
 import pl.tomekdudek.portfolioProject.MailService;
 import pl.tomekdudek.portfolioProject.ProjectRepository;
+import pl.tomekdudek.portfolioProject.UserRepository;
 import pl.tomekdudek.portfolioProject.models.Project;
+import pl.tomekdudek.portfolioProject.models.User;
 import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
 import pl.tomekdudek.portfolioProject.models.form.EmailForm;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -31,6 +35,9 @@ public class MainController {
 
     @Autowired
     MailService mailService;
+
+    @Autowired
+    UserRepository userRepository;
 
 
     @RequestMapping("/index")
@@ -62,29 +69,16 @@ public class MainController {
 
     }
 
-//    @RequestMapping(value = "/data", method = RequestMethod.GET)
-//    public String project(){
-//        return "project";
-//    }
-//
-//    @RequestMapping(value = "/data", method = RequestMethod.POST)
-//    @ResponseBody
-//    public String data(@RequestParam(value = "name", required = false) String nameFromForm,
-//                        @RequestParam(value = "lastname",required = false) String lastnameFromForm,
-//                        @RequestParam(value = "age", required = false) int age) {
-//        return "Twoje imię to: " + nameFromForm + "Twoje nazwisko to: " + lastnameFromForm + "Twój wiek to: " + age;
-//    }
-
     @RequestMapping(value = "/projectform", method = RequestMethod.GET)
-    public String projectForm(Model model){
+    public String projectForm(Model model) {
         model.addAttribute("projectObject", new ProjectForm());
         return "project";
 
     }
 
     @RequestMapping(value = "/projectform", method = RequestMethod.POST)
-    public String newProjectForm(@ModelAttribute ("projectObject") @Valid ProjectForm projectForm, BindingResult result){
-        if (result.hasErrors()){
+    public String newProjectForm(@ModelAttribute("projectObject") @Valid ProjectForm projectForm, BindingResult result) {
+        if (result.hasErrors()) {
             return "project";
         }
         Project projectObject = new Project(projectForm);
@@ -94,11 +88,17 @@ public class MainController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.registerCustomEditor(       Date.class,
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Date.class,
                 new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
     }
 
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @ResponseBody
+    public String user() {
+        List<User> userList = userRepository.findByRole("ADMIN");
+        return userList.stream().map(s -> s.getName()).collect(Collectors.joining("", "", ""));
+    }
 
 
 }
