@@ -40,7 +40,7 @@ public class MainController {
     UserRepository userRepository;
 
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public String index(Model model) {
 
         model.addAttribute("projects", projectRepository.findAll());
@@ -60,7 +60,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/index", method = RequestMethod.POST)
+    @RequestMapping(value = "/", method = RequestMethod.POST)
     @ResponseBody
     public String mail(EmailForm emailForm) {
 
@@ -69,14 +69,14 @@ public class MainController {
 
     }
 
-    @RequestMapping(value = "/projectform", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String projectForm(Model model) {
         model.addAttribute("projectObject", new ProjectForm());
         return "project";
 
     }
 
-    @RequestMapping(value = "/projectform", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin", method = RequestMethod.POST)
     public String newProjectForm(@ModelAttribute("projectObject") @Valid ProjectForm projectForm, BindingResult result) {
         if (result.hasErrors()) {
             return "project";
