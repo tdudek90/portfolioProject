@@ -1,6 +1,8 @@
 package pl.tomekdudek.portfolioProject.models;
 
 
+import pl.tomekdudek.portfolioProject.models.form.InformationForm;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +20,11 @@ public class Information {
     private int id;
     private String name;
     private String description;
+
+    public Information(InformationForm informationForm){
+        name = informationForm.getName();
+        description = informationForm.getDescription();
+    }
 
     public Information() {
     }

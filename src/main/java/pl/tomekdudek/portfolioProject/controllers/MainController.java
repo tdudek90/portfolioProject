@@ -7,11 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.thymeleaf.TemplateEngine;
 import pl.tomekdudek.portfolioProject.InformationRepository;
 import pl.tomekdudek.portfolioProject.MailService;
 import pl.tomekdudek.portfolioProject.ProjectRepository;
 import pl.tomekdudek.portfolioProject.UserRepository;
+import pl.tomekdudek.portfolioProject.models.Information;
 import pl.tomekdudek.portfolioProject.models.Project;
 import pl.tomekdudek.portfolioProject.models.User;
 import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
@@ -40,6 +40,8 @@ public class MainController {
     UserRepository userRepository;
 
 
+
+
     @RequestMapping("/")
     public String index(Model model) {
 
@@ -54,13 +56,14 @@ public class MainController {
         model.addAttribute("skills", informationRepository.findOne(7));
         model.addAttribute("location", informationRepository.findOne(8));
         model.addAttribute("web", informationRepository.findOne(9));
+        model.addAttribute("admin", informationRepository.findOne(10));
 
         model.addAttribute("emailObject", new EmailForm());
 
         return "index";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "/index", method = RequestMethod.POST)
     @ResponseBody
     public String mail(EmailForm emailForm) {
 
@@ -69,21 +72,32 @@ public class MainController {
 
     }
 
+    @RequestMapping(value = "/adminview", method = RequestMethod.GET)
+    public String adminview(Model model) {
+        model.addAttribute("projectObject", new ProjectForm());
+        model.addAttribute("informationObject", new Information());
+        return "adminview";
+
+    }
+
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String projectForm(Model model) {
         model.addAttribute("projectObject", new ProjectForm());
+        model.addAttribute("informationObject", new Information());
         return "project";
 
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.POST)
+    @ResponseBody
     public String newProjectForm(@ModelAttribute("projectObject") @Valid ProjectForm projectForm, BindingResult result) {
         if (result.hasErrors()) {
             return "project";
         }
+
         Project projectObject = new Project(projectForm);
         projectRepository.save(projectObject);
-        return "test";
+        return "Dodano nowy projekt";
 
     }
 
@@ -98,6 +112,30 @@ public class MainController {
     public String user() {
         List<User> userList = userRepository.findByRole("ADMIN");
         return userList.stream().map(s -> s.getName()).collect(Collectors.joining("", "", ""));
+    }
+
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String editInfo(Model model) {
+        model.addAttribute("informationObject",new Information());
+        return "editinfo";
+
+    }
+
+
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public String editAbout(@ModelAttribute("informationObject") @Valid Information informationForm, BindingResult result) {
+
+        if (result.hasErrors()){
+            return "editinfo";
+        }
+        Information existing = informationRepository.findOne(2);
+        existing.setDescription(informationForm.getDescription());
+        informationRepository.save(existing);
+        return "Dokonano zmiany tekstu sekcji about";
+
     }
 
 

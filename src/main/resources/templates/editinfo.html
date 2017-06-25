@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http//thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>EDYCJA DANYCH</title>
+</head>
+<body>
+<center>
+
+    <p><b>Edytuj sekcję about</b></p>
+    <form action="#" th:action="@{/edit}" th:object="${informationObject}" method="post">
+        <p>Wpisz nowy opis<input type="text" th:field="*{description}"/>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+        <p><input type="submit" value="Wyslij"/></p>
+
+    </form>
+
+</center>
+
+</body>
+</html>

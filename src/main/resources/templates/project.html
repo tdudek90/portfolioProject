@@ -2,14 +2,13 @@
 <html lang="en" xmlns:th="http//thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>PANEL ADMINISTRATORA</title>
+    <title>NOWY PROJEKT</title>
 </head>
 <body>
 <center>
 
-<!--<p th:text="${someString}"></p>-->
     <p><b>Dodaj nowy projekt</b></p>
-<form action="#" th:action="@{/projectform}" th:object="${projectObject}" method="post">
+<form action="#" th:action="@{/admin}" th:object="${projectObject}" method="post">
     <p>Name<input type="text" th:field="*{name}"/>
         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
     </p>
@@ -27,7 +26,6 @@
 
     <p>Img<input type="text" th:field="*{img}"/></p>
     <p><input type="submit" value="Wyslij"/></p>
-
 
 </form>
 </center>
