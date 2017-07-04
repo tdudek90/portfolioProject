@@ -8,6 +8,9 @@ package pl.tomekdudek.portfolioProject;
         import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
         import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
+        import java.io.File;
+        import java.util.Scanner;
+
 /**
  * Created by Tomek on 2017-06-25.
  */
@@ -40,10 +43,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)throws Exception{
+        File file = new File("C:\\Users\\Tomek\\Desktop\\portfolioProject\\log.txt");
+        Scanner scanner = new Scanner(file);
+        String user = scanner.nextLine();
+        String password = scanner.nextLine();
+        String role = scanner.nextLine();
         auth.
                 inMemoryAuthentication()
-                .withUser("Tomek").password("passtest").roles("ADMIN")
-                .and()
-                .withUser("test").password("pass").roles("USER");
+                .withUser(user).password(password).roles(role);
     }
 }
