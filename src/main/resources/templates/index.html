@@ -60,7 +60,7 @@
                 <li class="page-scroll">
                     <a th:text="${contact}" href="#contact"></a>
                 </li><li class="page-scroll">
-                    <a th:text="${admin}" href="/adminview"></a>
+                    <a th:text="${admin}" href="/login"></a>
                 </li>
             </ul>
         </div>
@@ -127,13 +127,13 @@
                 <p th:text="${about}"></p>
             </div>
             <div class="col-lg-4">
-                <p th:text="${about}"></p>
+                <p th:text="${about2}"></p>
             </div>
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <a href="#" class="btn btn-lg btn-outline">
-                    <i class="fa fa-download"></i> Download Theme
-                </a>
-            </div>
+            <!--<div class="col-lg-8 col-lg-offset-2 text-center">-->
+                <!--<a href="#" class="btn btn-lg btn-outline">-->
+                    <!--<i class="fa fa-download"></i> Download Theme-->
+                <!--</a>-->
+            <!--</div>-->
         </div>
     </div>
 </section>
@@ -268,8 +268,8 @@
                                     <strong><a href="#" th:text="${#dates.format(project.date, 'yyyy-MM-dd')}"></a>
                                     </strong>
                                 </li>
-                                <li>Serwis:
-                                    <strong><a href="#" th:text="${project.name}"></a>
+                                <li>Github:
+                                    <strong><a th:href="${project.url}" th:text="${project.name}"></a>
                                     </strong>
                                 </li>
                             </ul>

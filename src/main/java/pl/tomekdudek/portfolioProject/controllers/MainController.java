@@ -48,6 +48,7 @@ public class MainController {
         model.addAttribute("projects", projectRepository.findAll());
         model.addAttribute("header", informationRepository.findOne(1));
         model.addAttribute("about", informationRepository.findOne(2));
+        model.addAttribute("about2", informationRepository.findOne(12));
 
         model.addAttribute("navigation", informationRepository.findOne(3));
         model.addAttribute("myprojects", informationRepository.findOne(4));
