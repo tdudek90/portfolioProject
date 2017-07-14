@@ -25,7 +25,11 @@ public class SecureController {
 //        return "adminview";
 //    }
 
-    @GetMapping ("/afterlogout")
+    @GetMapping("/logout")
+    public String logout(){
+        return "afterlogout";
+    }
+    @GetMapping("/afterlogout")
     public String afterLogout(){
         return "afterlogout";
     }
