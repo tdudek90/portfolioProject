@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
 
 /**
@@ -13,10 +15,15 @@ import pl.tomekdudek.portfolioProject.models.form.ProjectForm;
 public class SecureController {
 
 
-    @GetMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(){
         return "login";
     }
+
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+//    public String afterLogin(){
+//        return "adminview";
+//    }
 
     @GetMapping ("/afterlogout")
     public String afterLogout(){

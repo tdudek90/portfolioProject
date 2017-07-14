@@ -24,6 +24,15 @@ public class Project {
     @Temporal(TemporalType.DATE)
     private Date date;
     private String img;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     private String url;
 
     public Project() {
@@ -35,15 +44,10 @@ public class Project {
         client = projectForm.getClient();
         date = projectForm.getDate();
         img = projectForm.getImg();
+        url = projectForm.getUrl();
     }
 
-    public String getUrl() {
-        return url;
-    }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public int getId() {
         return id;

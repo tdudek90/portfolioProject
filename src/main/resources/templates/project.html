@@ -8,26 +8,28 @@
 <center>
 
     <p><b>Dodaj nowy projekt</b></p>
-<form action="#" th:action="@{/admin}" th:object="${projectObject}" method="post">
-    <p>Name<input type="text" th:field="*{name}"/>
-        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
-    </p>
-    <p>Description<input type="text" th:field="*{description}"/>
-        <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description error</span>
-    </p>
+    <form action="#" th:action="@{/newproject}" th:object="${projectObject}" method="post">
+        <p>Name<input type="text" th:field="*{name}"/>
+            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</span>
+        </p>
+        <p>Description<input type="text" th:field="*{description}"/>
+            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}">description error</span>
+        </p>
 
-    <p>Client<input type="text" th:field="*{client}"/>
-        <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}">client error</span>
-    </p>
-    <p>Data<input type="date" th:field="*{date}"/>
-        <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date error</span>
+        <p>Client<input type="text" th:field="*{client}"/>
+            <span th:if="${#fields.hasErrors('client')}" th:errors="*{client}">client error</span>
+        </p>
+        <p>Data<input type="date" th:field="*{date}"/>
+            <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date error</span>
 
-    </p>
+        </p>
 
-    <p>Img<input type="text" th:field="*{img}"/></p>
-    <p><input type="submit" value="Wyslij"/></p>
+        <p>Img<input type="text" th:field="*{img}"/></p>
+        <p>Github<input type="text" th:field="*{url}"/></p>
 
-</form>
+        <p><input type="submit" value="Wyslij"/></p>
+
+    </form>
 </center>
 </body>
 </html>

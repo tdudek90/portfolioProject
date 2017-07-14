@@ -21,14 +21,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/index").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/adminview").hasRole("ADMIN")
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/img/**").permitAll()
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/less/**").permitAll()
                 .antMatchers("/vendor/**").permitAll()
+                .antMatchers("/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -37,8 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/afterlogout").deleteCookies("JSESSIONID")
-                .invalidateHttpSession(true)
-                .permitAll();
+                .invalidateHttpSession(true);
     }
 
     @Autowired

@@ -22,9 +22,19 @@ public class ProjectForm {
     private Date date;
     @NotEmpty
     private String img;
+    @NotEmpty
+    private String url;
 
     public ProjectForm(){
 
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
 
